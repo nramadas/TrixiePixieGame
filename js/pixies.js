@@ -59,18 +59,27 @@ var PG = (function () {
     this.altitude = 0;
     this.jumpAmount = 20;
     this.jumpDirection = 'up';
+    this.direction = "right";
 
     this.draw = function(context) {
-      var img = new Image();
-      img.src = '../assets/pixie.png';
-      context.drawImage(img, that.posX, that.posY - 60);
+      if (that.direction == "left") {
+        var img = new Image();
+        img.src = "../assets/pixieL.png";
+        context.drawImage(img, that.posX, that.posY - 60);
+      } else {
+        var img = new Image();
+        img.src = '../assets/pixie.png';
+        context.drawImage(img, that.posX, that.posY - 60);
+      }
     };
 
     this.move = function (dir) {
       if (dir == "right") {
         that.deltaX = 5;
+        that.direction = "right";
       } else {
         that.deltaX = -5;
+        that.direction = "left";
       }
     };
 
@@ -109,7 +118,7 @@ var PG = (function () {
       // console.log(that.deltaX);
       // console.log(that.posX);
       // console.log(obj.posX);
-      if ((((this.deltaX + this.posX) > (obj.posX)) && ((this.deltaX + this.posX - 20) < (obj.posX + obj.width))) && (this.posY == obj.posY)) {
+      if ((((this.deltaX + this.posX + 30) > (obj.posX)) && ((this.deltaX + this.posX - 20) < (obj.posX + obj.width))) && (this.posY == obj.posY)) {
         that.deltaX = 0;
       }
     }
